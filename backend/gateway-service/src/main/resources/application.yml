@@ -1,0 +1,63 @@
+server:
+  port: ${GATEWAY_PORT:9001}
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: ${GATEWAY_CONNECT_TIMEOUT_MS:3000}
+        response-timeout: ${GATEWAY_RESPONSE_TIMEOUT:10s}
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: ${GATEWAY_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:5174}
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            exposedHeaders:
+              - Location
+            allowCredentials: true
+      routes:
+        - id: travel-request-service
+          uri: ${TRAVEL_REQUEST_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/travel-requests,/api/travel-requests/**
+        - id: expense-service
+          uri: ${EXPENSE_SERVICE_URL:http://localhost:8086}
+          predicates:
+            - Path=/api/expenses,/api/expenses/**
+        - id: admin-service
+          uri: ${ADMIN_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/admin,/api/admin/**,/api/auth/login,/api/auth/change-password,/api/auth/complete-password-change
+        - id: audit-service
+          uri: ${AUDIT_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/audit,/api/audit/**
+        - id: notification-service
+          uri: ${NOTIFICATION_SERVICE_URL:http://localhost:8085}
+          predicates:
+            - Path=/api/notifications,/api/notifications/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  level:
+    com.travelease.gateway: INFO
+    org.springframework.cloud.gateway: INFO

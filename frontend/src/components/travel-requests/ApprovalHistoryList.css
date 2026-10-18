@@ -1,0 +1,76 @@
+/* P-04 Travel Request Detail approval history styles (I-05). Tokens only — see
+   src/styles/tokens.css (frontend-constitution.md §12); no hardcoded colors. */
+.approval-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.approval-history-list__heading {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.approval-history-list__entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.approval-history-list__entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface);
+}
+
+.approval-history-list__decision {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Supporting color only — the visible decision text ("Approved"/"Rejected")
+   carries the meaning, so the decision is never conveyed by color alone
+   (frontend-requirement.md §11). */
+.approval-history-list__decision--approved {
+  color: var(--color-status-approved);
+}
+
+.approval-history-list__decision--rejected {
+  color: var(--color-status-rejected);
+}
+
+.approval-history-list__meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.approval-history-list__label {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.approval-history-list__reason {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  overflow-wrap: break-word;
+}

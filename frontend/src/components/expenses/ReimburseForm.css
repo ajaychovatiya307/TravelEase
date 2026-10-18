@@ -1,0 +1,36 @@
+/* ReimburseForm (J-05, frontend-tasks.md): optional reimbursed-at timestamp
+   form layout for the P-15 Reimbursement Action (ui-model.md §4,
+   api-contract.md §5.11). Plain CSS referencing design tokens only
+   (frontend-constitution.md §12); the individual field chrome
+   (label/input/inline error) comes from the shared FormField styles
+   (src/shared/FormField/FormField.css). */
+.reimburse-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.reimburse-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reimburse-form__submit {
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-weight: var(--font-weight-medium);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+}
+
+.reimburse-form__submit:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.reimburse-form__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

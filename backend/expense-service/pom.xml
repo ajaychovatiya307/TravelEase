@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.travelease</groupId>
+        <artifactId>travelease-backend</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>expense-service</artifactId>
+    <packaging>jar</packaging>
+    <name>expense-service</name>
+
+    <!-- Per-service SonarQube identity + coverage scoping. Everything shared
+         (quality gate settings, sonar.sources/tests/binaries, jacoco.xmlReportPaths,
+         junit report paths, S6813/S4502 issue ignores) is inherited from the
+         parent travelease-backend pom. -->
+    <properties>
+        <!-- SonarQube project key/name (batch-group-project convention).
+             Rename to match the team's SonarQube project naming if needed. -->
+        <sonar.projectKey>travelease-expense-service</sonar.projectKey>
+        <sonar.projectName>travelease-expense-service</sonar.projectName>
+        <!-- Coverage is measured/enforced ONLY on service + controller packages;
+             everything else is excluded from SonarQube coverage. -->
+        <sonar.coverage.exclusions>src/main/java/com/travelease/expense/client/**,src/main/java/com/travelease/expense/config/**,src/main/java/com/travelease/expense/dto/**,src/main/java/com/travelease/expense/entity/**,src/main/java/com/travelease/expense/event/**,src/main/java/com/travelease/expense/exception/**,src/main/java/com/travelease/expense/mapper/**,src/main/java/com/travelease/expense/repository/**,src/main/java/com/travelease/expense/validation/**,src/main/java/com/travelease/expense/ExpenseServiceApplication*</sonar.coverage.exclusions>
+    </properties>
+
+    <dependencies>
+        <!-- #18: versioned schema migrations (replaces ddl-auto=update) -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.travelease</groupId>
+            <artifactId>common-lib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- M-07: include *IT.java integration tests alongside *Test.java unit tests -->
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*IT.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- JaCoCo: version inherited from parent pluginManagement.
+                 Excludes mirror sonar.coverage.exclusions above (as class-path
+                 patterns) so coverage is generated and enforced only for the
+                 service + controller packages. -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>com/travelease/expense/client/**</exclude>
+                        <exclude>com/travelease/expense/config/**</exclude>
+                        <exclude>com/travelease/expense/dto/**</exclude>
+                        <exclude>com/travelease/expense/entity/**</exclude>
+                        <exclude>com/travelease/expense/event/**</exclude>
+                        <exclude>com/travelease/expense/exception/**</exclude>
+                        <exclude>com/travelease/expense/mapper/**</exclude>
+                        <exclude>com/travelease/expense/repository/**</exclude>
+                        <exclude>com/travelease/expense/validation/**</exclude>
+                        <exclude>com/travelease/expense/ExpenseServiceApplication*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <!-- Thresholds follow the reference pom (50% line/branch)
+                         and can be tuned per service. PACKAGE-prefix matching
+                         also covers the service.impl sub-package. -->
+                    <execution>
+                        <id>coverage-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule implementation="org.jacoco.maven.RuleConfiguration" element="PACKAGE">
+                                    <includes>
+                                        <include>com.travelease.expense.service</include>
+                                        <include>com.travelease.expense.controller</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.5</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.5</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- SonarQube scanner: declared but intentionally NOT bound to any
+                 lifecycle phase. Run analysis explicitly with
+                 `mvn sonar:sonar` (from this module or the backend root). -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

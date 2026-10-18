@@ -1,0 +1,177 @@
+/* Design tokens: single source of truth for color, spacing, typography, and breakpoint scales (frontend-constitution.md §12).
+
+   Theming: every color/elevation token below is defined once for light mode on :root and
+   overridden for dark mode on :root[data-theme="dark"]. The data-theme attribute is set
+   before first paint by the inline script in index.html and kept in sync by ThemeProvider
+   (src/context/ThemeContext.tsx). Components must consume these tokens (or the aliases in
+   global.css) rather than literal colors so they follow the active theme automatically. */
+:root {
+  color-scheme: light;
+
+  /* Color: neutrals */
+  --color-bg: #f2f5f4;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f6f8f7;
+  --color-surface-hover: #eef3f2;
+  --color-border: #dce3e1;
+  --color-border-strong: #bfcac7;
+  --color-text: #15211f;
+  --color-text-secondary: #485856;
+  --color-text-muted: #63726f;
+  /* Text placed on solid semantic fills (toasts, count badges). */
+  --color-text-inverse: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Color: brand */
+  --color-primary: #0d5c5e;
+  --color-primary-hover: #094648;
+  --color-primary-soft: #e0eeed;
+  --color-primary-contrast: #ffffff;
+
+  /* Color: semantic feedback */
+  --color-success: #166534;
+  --color-success-bg: #e6f4ea;
+  --color-warning: #92400e;
+  --color-warning-bg: #fdf1dc;
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fbe9e9;
+  --color-info: #0f5c99;
+  --color-info-bg: #e3effa;
+  --color-required: #b3261e;
+
+  /* Color: workflow status chips used by the app-shell `.status` styles */
+  --color-chip-approved: #1c6632;
+  --color-chip-approved-bg: #e2f2e6;
+  --color-chip-pending: #7d5200;
+  --color-chip-pending-bg: #faedcd;
+  --color-chip-rejected: #a3271b;
+  --color-chip-rejected-bg: #fbe5e2;
+  --color-chip-reimbursed: #38475f;
+  --color-chip-reimbursed-bg: #e5e9f0;
+
+  /* Color: sidebar (dark petrol in both themes) */
+  --color-sidebar-bg: #10292b;
+  --color-sidebar-border: #1f3d40;
+  --color-sidebar-text: #b4c8c7;
+  --color-sidebar-text-active: #ffffff;
+  --color-sidebar-hover: #183639;
+  --color-sidebar-active: #1f4649;
+
+  /* Color: focus (must remain visible for keyboard navigation, frontend-constitution.md §13) */
+  --color-focus-ring: #0d5c5e;
+  --color-focus-glow: rgba(13, 92, 94, 0.28);
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 1px 2px rgba(16, 41, 43, 0.06);
+  --shadow-popover: 0 12px 32px rgba(16, 41, 43, 0.18);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #0f1716;
+  --color-surface: #17211f;
+  --color-surface-subtle: #1b2725;
+  --color-surface-hover: #1f2d2b;
+  --color-border: #2a3836;
+  --color-border-strong: #3d4f4c;
+  --color-text: #e6eeec;
+  --color-text-secondary: #b5c4c1;
+  --color-text-muted: #8f9f9c;
+  --color-text-inverse: #0f1716;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+
+  --color-primary: #56b9b6;
+  --color-primary-hover: #74cbc8;
+  --color-primary-soft: #17383a;
+  --color-primary-contrast: #06201f;
+
+  --color-success: #82d59c;
+  --color-success-bg: #163322;
+  --color-warning: #f0c263;
+  --color-warning-bg: #3a2c0c;
+  --color-danger: #f39b8f;
+  --color-danger-bg: #3d1b17;
+  --color-info: #8fc1ec;
+  --color-info-bg: #14283d;
+  --color-required: #f39b8f;
+
+  --color-chip-approved: #82d59c;
+  --color-chip-approved-bg: #163322;
+  --color-chip-pending: #f0c263;
+  --color-chip-pending-bg: #3a2c0c;
+  --color-chip-rejected: #f39b8f;
+  --color-chip-rejected-bg: #3d1b17;
+  --color-chip-reimbursed: #adbfdc;
+  --color-chip-reimbursed-bg: #232d3d;
+
+  --color-sidebar-bg: #0b1211;
+  --color-sidebar-border: #1b2725;
+  --color-sidebar-text: #a3b6b4;
+  --color-sidebar-text-active: #ffffff;
+  --color-sidebar-hover: #14201f;
+  --color-sidebar-active: #1a302f;
+
+  --color-focus-ring: #56b9b6;
+  --color-focus-glow: rgba(86, 185, 182, 0.35);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Theme-independent tokens. Status colors are aliases so they follow the theme above. */
+:root {
+  /* Color: workflow status (paired with text/icon per accessibility rule, never color alone) */
+  --color-status-pending: var(--color-warning);
+  --color-status-pending-bg: var(--color-warning-bg);
+  --color-status-approved: var(--color-success);
+  --color-status-approved-bg: var(--color-success-bg);
+  --color-status-rejected: var(--color-danger);
+  --color-status-rejected-bg: var(--color-danger-bg);
+  --color-status-reimbursed: var(--color-info);
+  --color-status-reimbursed-bg: var(--color-info-bg);
+  --color-status-duplicate: var(--color-danger);
+  --color-status-duplicate-bg: var(--color-danger-bg);
+
+  /* Spacing scale (4px base unit) */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Typography */
+  --font-family-base: 'IBM Plex Sans', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+
+  /* Borders */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-width: 1px;
+
+  /* Breakpoints (px) — mirrored in src/styles/tokens.ts for JS-side use, since CSS
+     custom properties cannot be referenced inside @media conditions. */
+  --breakpoint-mobile: 0px;
+  --breakpoint-tablet: 600px;
+  --breakpoint-desktop: 1024px;
+  /* Table -> stacked card layout threshold (frontend-clarification.md Q24). */
+  --breakpoint-table-card: 768px;
+}

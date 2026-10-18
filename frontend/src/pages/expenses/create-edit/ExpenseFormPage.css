@@ -1,0 +1,40 @@
+/* I-11 New / Edit Expense Claim pages (P-11/P-12; frontend-tasks.md I-11,
+   frontend-spec.md §4.9). Tokens per frontend-constitution.md §12; the page
+   shell (header + stacked card sections) mirrors the P-10 detail page — the
+   `TravelRequestPicker`/`ExpenseClaimForm` cards own their inner styles. */
+
+.expense-form-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.expense-form-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.expense-form-page__header p {
+  color: var(--color-text-muted);
+}
+
+.expense-form-page__back {
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.expense-form-page__back:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .expense-form-page__header {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,61 @@
+# TravelEase - Admin Service
+# Unversioned API surface (NFR-06): every endpoint is served under the /api context path.
+# NOTE: Controllers map paths RELATIVE to the context path (e.g. "/admin/users"),
+#       which resolves to /api/admin/users. Do not repeat "/api" in controller mappings.
+server:
+  port: 8082
+
+spring:
+  config:
+    import: "optional:file:./.env[.properties],optional:file:../.env[.properties]"
+  application:
+    name: admin-service
+  datasource:
+    url: jdbc:mysql://${TRAVELEASE_DB_HOST:localhost}:${TRAVELEASE_DB_PORT:3306}/travelease_admin?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    # Credentials come from the environment (or a git-ignored backend/.env in local dev).
+    # Production startup fails if these are missing or a known default (common-lib ProductionSafetyEnvironmentPostProcessor).
+    username: ${TRAVELEASE_DB_USERNAME}
+    password: ${TRAVELEASE_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    # #18: schema is owned by versioned migrations (src/main/resources/db/migration).
+    # Existing databases created by the old ddl-auto=update are baselined at V1 (the captured
+    # existing schema) and only receive V2+; empty databases get V1 then V2.
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 1
+  jpa:
+    hibernate:
+      # Hibernate only checks the schema; it never alters it.
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+security:
+  internal:
+    # Service-to-service credential secret (>= 32 bytes, different from the JWT secret). Required:
+    # event ingestion and admin /internal/** endpoints only accept tokens signed with it.
+    secret: ${TRAVELEASE_INTERNAL_SECRET:}
+  jwt:
+    # Shared HS256 signing secret (>= 32 bytes). No fallback: startup fails when it is missing.
+    secret: ${TRAVELEASE_JWT_SECRET:}
+
+logging:
+  level:
+    root: INFO
+    com.travelease: INFO
+
+travelease:
+  bootstrap:
+    # #18: first administrator of a fresh environment. Used only while no active ADMIN exists;
+    # the account must change this password at first login. Remove both variables afterwards.
+    admin:
+      email: ${TRAVELEASE_BOOTSTRAP_ADMIN_EMAIL:}
+      password: ${TRAVELEASE_BOOTSTRAP_ADMIN_PASSWORD:}
+  outbox:
+    # Administrative changes are audited only (no end-user notifications).
+    destinations:
+      audit: ${AUDIT_EVENTS_URL:http://localhost:8084/api/events}

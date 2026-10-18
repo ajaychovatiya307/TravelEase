@@ -1,0 +1,19 @@
+# Production profile (SPRING_PROFILES_ACTIVE=prod). The gateway holds no secrets or database;
+# route targets (*_SERVICE_URL) and CORS origins (GATEWAY_ALLOWED_ORIGINS) come from the environment.
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+logging:
+  level:
+    root: INFO
+    com.travelease: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never

@@ -1,0 +1,25 @@
+/* Travel Request create/edit/resubmit page shell (I-06, frontend-tasks.md;
+   P-05/P-06, frontend-spec.md §4.5). Plain CSS referencing design tokens
+   only (frontend-constitution.md §12) — no hardcoded magic values. */
+.travel-request-form-page {
+  width: 100%;
+  max-width: 36rem;
+}
+
+.travel-request-form-page__heading {
+  margin-bottom: var(--space-2);
+}
+
+.travel-request-form-page__back-link {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+  color: var(--color-primary);
+}
+
+.travel-request-form-page__back-link:hover {
+  color: var(--color-primary-hover);
+}
+
+.travel-request-form-page__content {
+  margin-top: var(--space-4);
+}

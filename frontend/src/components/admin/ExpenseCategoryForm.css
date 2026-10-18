@@ -1,0 +1,46 @@
+/* P-19 expense category form (J-09, frontend-tasks.md; hosted by the I-14
+   ExpenseCategoriesPage): the Admin create/edit form per
+   frontend-spec.md §4.12 and ui-model.md §4. Tokens per
+   frontend-constitution.md §12; the card mirrors `ExpenseSummary` and the
+   submit button mirrors the P-10 `ActionBar` (I-10) primary-button pattern
+   (as in the P-13 expense-review-form, J-04). Field chrome (label, input,
+   inline error) is the shared FormField (C-07) styling. */
+
+.expense-category-form {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.expense-category-form form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.expense-category-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.expense-category-form__submit {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  cursor: pointer;
+}
+
+.expense-category-form__submit:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.expense-category-form__submit:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}

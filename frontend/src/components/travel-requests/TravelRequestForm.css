@@ -1,0 +1,49 @@
+/* TravelRequestForm (J-01, frontend-tasks.md): single-step create/edit/
+   resubmit form layout (frontend-spec.md §4.5). Plain CSS referencing design
+   tokens only (frontend-constitution.md §12); the individual field chrome
+   (label/input/inline error) comes from the shared FormField styles
+   (src/shared/FormField/FormField.css). */
+.travel-request-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.travel-request-form__documents {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Server `documentIds` field error (frontend-api-mapping.md §3), rendered
+   under the upload section. */
+.travel-request-form__documents-error {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+.travel-request-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.travel-request-form__submit {
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-weight: var(--font-weight-medium);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+}
+
+.travel-request-form__submit:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.travel-request-form__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

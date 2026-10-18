@@ -1,0 +1,35 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius-sm);
+  white-space: nowrap;
+}
+
+.status-badge--draft {
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+}
+
+.status-badge--pending {
+  color: var(--color-status-pending);
+  background-color: var(--color-status-pending-bg);
+}
+
+.status-badge--approved {
+  color: var(--color-status-approved);
+  background-color: var(--color-status-approved-bg);
+}
+
+.status-badge--rejected {
+  color: var(--color-status-rejected);
+  background-color: var(--color-status-rejected-bg);
+}
+
+.status-badge--reimbursed {
+  color: var(--color-status-reimbursed);
+  background-color: var(--color-status-reimbursed-bg);
+}

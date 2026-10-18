@@ -1,0 +1,12 @@
+.duplicate-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-status-duplicate);
+  background-color: var(--color-status-duplicate-bg);
+  border-radius: var(--border-radius-sm);
+  white-space: nowrap;
+}

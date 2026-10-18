@@ -1,0 +1,24 @@
+.session-expiry-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+}
+.session-expiry-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 0.45);
+}
+.session-expiry-dialog { width: min(420px, 100%); padding: 24px; display: grid; gap: 12px; }
+.session-expiry-dialog__form { display: grid; gap: 12px; }
+.session-expiry-dialog__actions { display: flex; flex-wrap: wrap; gap: 8px; }

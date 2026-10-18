@@ -1,0 +1,46 @@
+/* P-04 Travel Request Detail action bar styles (I-05). Tokens only — see
+   src/styles/tokens.css (frontend-constitution.md §12); no hardcoded colors. */
+.action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-surface);
+}
+
+.action-bar__button {
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-base);
+  cursor: pointer;
+}
+
+.action-bar__button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.action-bar__button:focus-visible {
+  outline: var(--border-width) solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+
+/* The Approve/Reject action is the decisive one — it gets the filled
+   (primary) treatment, while Edit/Resubmit stay outlined. */
+.action-bar__button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.action-bar__button--primary:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-primary-contrast);
+}

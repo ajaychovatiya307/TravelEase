@@ -1,0 +1,25 @@
+/* RejectionReasonBanner (J-01, frontend-tasks.md): read-only prior rejection
+   reason banner (frontend-clarification.md Q12, frontend-spec.md §4.5).
+   Styled to match the shared ErrorBanner variants
+   (src/shared/ErrorBanner/ErrorBanner.css) with the warning palette, since it
+   reports prior state rather than a current submit error. Design tokens only
+   (frontend-constitution.md §12). */
+.rejection-reason-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-warning);
+  background-color: var(--color-warning-bg);
+}
+
+.rejection-reason-banner__title {
+  font-weight: var(--font-weight-medium);
+}
+
+.rejection-reason-banner__reason {
+  margin: 0;
+  white-space: pre-wrap;
+}

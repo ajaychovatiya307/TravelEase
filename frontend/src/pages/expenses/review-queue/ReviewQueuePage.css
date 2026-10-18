@@ -1,0 +1,43 @@
+.review-queue-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.review-queue-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.review-queue-page__header p {
+  color: var(--color-text-muted);
+}
+
+.review-queue-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.review-queue-page__filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.review-queue-page__filter label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.review-queue-page__filter-select {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-base);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

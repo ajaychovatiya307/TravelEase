@@ -1,0 +1,30 @@
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+}
+
+.error-banner--error,
+.error-banner--conflict {
+  color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+}
+
+.error-banner--warning,
+.error-banner--policy {
+  color: var(--color-warning);
+  background-color: var(--color-warning-bg);
+}
+
+.error-banner__dismiss {
+  background: none;
+  border: none;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  color: inherit;
+}

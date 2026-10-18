@@ -1,0 +1,87 @@
+/* P-11/P-12 travel request picker (I-11, frontend-tasks.md; frontend-spec.md
+   §4.9): the controlled single-select that links an expense claim to one of
+   the caller's own `Approved` travel requests (VAL-09). Tokens per
+   frontend-constitution.md §12; the options card mirrors the `ExpenseClaimForm`
+   (J-03) card chrome and the selected state reuses the P-10 `ActionBar` (I-10)
+   primary-button pattern. */
+
+.travel-request-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.travel-request-picker__options {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.travel-request-picker__label {
+  padding: 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.travel-request-picker__required {
+  color: var(--color-danger);
+}
+
+.travel-request-picker__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+
+.travel-request-picker__option + .travel-request-picker__option {
+  margin-top: var(--space-2);
+}
+
+.travel-request-picker__option:hover {
+  border-color: var(--color-primary);
+}
+
+.travel-request-picker__option--selected,
+.travel-request-picker__option--selected:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-info-bg);
+}
+
+.travel-request-picker__radio:focus-visible {
+  outline: var(--border-width) solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+
+.travel-request-picker__text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+}
+
+.travel-request-picker__reference {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.travel-request-picker__destination {
+  font-weight: var(--font-weight-medium);
+}
+
+.travel-request-picker__dates {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.travel-request-picker__field-error {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}

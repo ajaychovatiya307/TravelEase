@@ -1,0 +1,7 @@
+# Local-development profile (activate with SPRING_PROFILES_ACTIVE=dev).
+# Opts in to the synthetic demo records. Demo seeding is refused whenever a prod/production
+# profile is also active, so this file cannot enable it in production.
+travelease:
+  seed:
+    demo-data:
+      enabled: true

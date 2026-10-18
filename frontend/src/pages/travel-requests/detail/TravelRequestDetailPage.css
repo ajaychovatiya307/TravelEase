@@ -1,0 +1,15 @@
+/* Travel Request Detail (P-04, frontend-spec.md §4.4; frontend-tasks.md I-05):
+   stacked TravelRequestSummary + ApprovalHistoryList + ActionBar inside the
+   AuthenticatedLayout. Plain CSS referencing design tokens only
+   (frontend-constitution.md §12) — no hardcoded magic values. */
+.travel-request-detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 40rem;
+}
+
+.travel-request-detail-page__heading {
+  margin: 0;
+}

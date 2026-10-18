@@ -1,0 +1,13 @@
+# Local-development profile (activate with SPRING_PROFILES_ACTIVE=dev).
+# Opts in to demo accounts (DataSeeder). Demo seeding is refused whenever a prod/production
+# profile is also active, so this file cannot enable it in production.
+travelease:
+  seed:
+    demo-data:
+      enabled: true
+
+security:
+  seed:
+    # Password for the demo accounts created on an empty database. Development only; existing
+    # accounts are never modified. Required: seeding refuses to run until TRAVELEASE_SEED_PASSWORD is set.
+    password: ${TRAVELEASE_SEED_PASSWORD:}

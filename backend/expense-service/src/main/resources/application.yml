@@ -1,0 +1,85 @@
+# TravelEase - Expense Service
+# Unversioned API surface (NFR-06): every endpoint is served under the /api context path.
+# NOTE: Controllers map paths RELATIVE to the context path (e.g. "/expenses"),
+#       which resolves to /api/expenses. Do not repeat "/api" in controller mappings.
+server:
+  port: 8086
+  servlet:
+    context-path: ""
+  tomcat:
+    # Let Tomcat read (and discard) an oversized upload body so the client receives the
+    # 400 "File size exceeds maximum allowed (5 MB)" response instead of a reset connection.
+    max-swallow-size: 12MB
+
+spring:
+  servlet:
+    multipart:
+      # Matches DocumentConstraintValidator.MAX_FILE_SIZE_BYTES and the frontend's 5 MB rule
+      # (5 * 1024 * 1024 bytes; Spring's MB is binary). Larger files -> 400 VALIDATION_ERROR.
+      max-file-size: 5MB
+      # One file plus the small form fields (fileName, fileType).
+      max-request-size: 6MB
+  config:
+    import: "optional:file:./.env[.properties],optional:file:../.env[.properties]"
+  application:
+    name: expense-service
+  datasource:
+    url: jdbc:mysql://${TRAVELEASE_DB_HOST:localhost}:${TRAVELEASE_DB_PORT:3306}/travelease_expence?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    # Credentials come from the environment (or a git-ignored backend/.env in local dev).
+    # Production startup fails if these are missing or a known default (common-lib ProductionSafetyEnvironmentPostProcessor).
+    username: ${TRAVELEASE_DB_USERNAME}
+    password: ${TRAVELEASE_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    # #18: schema is owned by versioned migrations (src/main/resources/db/migration).
+    # Existing databases created by the old ddl-auto=update are baselined at V1 (the captured
+    # existing schema) and only receive V2+; empty databases get V1 then V2.
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 1
+  jpa:
+    hibernate:
+      # Hibernate only checks the schema; it never alters it.
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    root: INFO
+    com.travelease: INFO
+
+admin-service:
+  internal-base-url: ${ADMIN_SERVICE_INTERNAL_URL:http://localhost:8082}
+  base-url: ${ADMIN_SERVICE_API_URL:http://localhost:8082/api}
+travel-request-service:
+  base-url: ${TRAVEL_REQUEST_SERVICE_API_URL:http://localhost:8081/api}
+audit-service:
+  events-url: ${AUDIT_EVENTS_URL:http://localhost:8084/api/events}
+notification-service:
+  events-url: ${NOTIFICATION_EVENTS_URL:http://localhost:8085/api/events}
+
+security:
+  internal:
+    # Service-to-service credential secret (>= 32 bytes, different from the JWT secret). Required:
+    # event ingestion and admin /internal/** endpoints only accept tokens signed with it.
+    secret: ${TRAVELEASE_INTERNAL_SECRET:}
+  jwt:
+    # Shared HS256 verification secret (>= 32 bytes). No fallback: startup fails when it is missing.
+    secret: ${TRAVELEASE_JWT_SECRET:}
+
+travelease:
+  storage:
+    # #18: one explicit document root for uploads and downloads. Production must set
+    # TRAVELEASE_STORAGE_DIR to an absolute, persistent (backed-up) location; startup fails otherwise.
+    base-dir: ${TRAVELEASE_STORAGE_DIR:${user.home}/.travelease/documents}
+    required: true
+  outbox:
+    # Transactional outbox: events are committed with the business change and delivered with
+    # bounded retries (common-lib OutboxDispatcher).
+    destinations:
+      audit: ${audit-service.events-url:http://localhost:8084/api/events}
+      notification: ${notification-service.events-url:http://localhost:8085/api/events}

@@ -1,0 +1,30 @@
+/* P-10 action bar (I-10, frontend-tasks.md): conditional Edit/Review/
+   Reimburse buttons per frontend-spec.md §4.8 / ui-model.md §2.
+   Tokens per frontend-constitution.md §12; the base button mirrors the
+   P-04 travel-request `ActionBar` (I-05) and the app's primary
+   action-button pattern. */
+
+.action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.action-bar__button {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  cursor: pointer;
+}
+
+.action-bar__button:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}

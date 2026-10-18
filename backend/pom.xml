@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.travelease</groupId>
+    <artifactId>travelease-backend</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>TravelEase Backend</name>
+    <description>Aggregator backend for the TravelEase multi-module Spring Boot application</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <!-- #18: failing tests fail the build. Pass -Dmaven.test.failure.ignore=true explicitly
+             only for a report-only run (e.g. collecting results for SonarQube). -->
+        <maven.test.failure.ignore>false</maven.test.failure.ignore>
+
+        <!-- SonarQube analysis: shared settings inherited by every module.
+             NOTE: sonar.projectKey / sonar.projectName are intentionally NOT set
+             here - each microservice needs its own unique project key, so those
+             are declared per-module in the child poms (along with per-module
+             sonar.coverage.exclusions and the JaCoCo execution bindings). -->
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+        <sonar.qualitygate.failOnSonarQubeExitCode>true</sonar.qualitygate.failOnSonarQubeExitCode>
+        <sonar.qualitygate.timeout>300</sonar.qualitygate.timeout>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
+        <sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
+        <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S6813</sonar.issue.ignore.multicriteria.e1.ruleKey>
+        <sonar.issue.ignore.multicriteria.e1.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e1.resourceKey>
+        <sonar.issue.ignore.multicriteria.e2.ruleKey>java:S4502</sonar.issue.ignore.multicriteria.e2.ruleKey>
+        <sonar.issue.ignore.multicriteria.e2.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e2.resourceKey>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.travelease</groupId>
+                <artifactId>common-lib</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>common-lib</module>
+        <module>gateway-service</module>
+        <module>travel-request-service</module>
+        <module>expense-service</module>
+        <module>admin-service</module>
+        <module>audit-service</module>
+        <module>notification-service</module>
+    </modules>
+
+    <build>
+        <!-- Shared plugin versions + configuration so child poms do not repeat
+             them. PMD: intentionally NOT declared (unlike the reference pom)
+             because it requires a RuleSet.xml file that does not exist in this
+             project and would break the build. -->
+        <pluginManagement>
+            <plugins>
+                <!-- Surefire: test failures FAIL the build by default (maven.test.failure.ignore=false
+                     above). A report-only run can opt in with -Dmaven.test.failure.ignore=true. -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.2</version>
+                    <configuration>
+                        <failIfNoTests>false</failIfNoTests>
+                        <!-- run unit (*Test) AND integration (*IT) tests in every module; without this,
+                             modules that do not repeat the includes silently skip their *IT classes -->
+                        <includes>
+                            <include>**/*Test.java</include>
+                            <include>**/*Tests.java</include>
+                            <include>**/*IT.java</include>
+                        </includes>
+                        <testFailureIgnore>${maven.test.failure.ignore}</testFailureIgnore>
+                    </configuration>
+                </plugin>
+                <!-- JaCoCo: version only, no executions here. Lifecycle
+                     executions are bound per child pom so that coverage is
+                     measured/enforced on each service's own code. -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.15</version>
+                </plugin>
+                <!-- SonarQube scanner: declared but intentionally NOT bound to any
+                     lifecycle phase - run the analysis explicitly with
+                     `mvn sonar:sonar`. -->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>5.7.0.6970</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

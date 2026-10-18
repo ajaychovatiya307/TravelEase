@@ -1,0 +1,31 @@
+.loading-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.loading-skeleton__line {
+  height: 1rem;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface);
+  animation: loading-skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.loading-skeleton--table .loading-skeleton__line {
+  height: 2.5rem;
+}
+
+.loading-skeleton--form .loading-skeleton__line {
+  height: 2.25rem;
+  max-width: 24rem;
+}
+
+@keyframes loading-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}

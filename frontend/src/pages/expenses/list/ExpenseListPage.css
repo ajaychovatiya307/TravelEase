@@ -1,0 +1,63 @@
+.expense-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.expense-list-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.expense-list-page__header p {
+  color: var(--color-text-muted);
+}
+
+.expense-list-page__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.expense-list-page__export-action {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.expense-list-page__export-action:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.expense-list-page__export-error {
+  color: var(--color-danger);
+}
+
+.expense-list-page__new-action {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .expense-list-page__header {
+    flex-direction: column;
+  }
+
+  .expense-list-page__actions {
+    flex-wrap: wrap;
+  }
+}

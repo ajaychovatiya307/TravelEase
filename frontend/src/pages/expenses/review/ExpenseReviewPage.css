@@ -1,0 +1,68 @@
+/* P-13 Expense Review (I-12, frontend-tasks.md; frontend-spec.md §4.10).
+   Tokens per frontend-constitution.md §12; the page shell (header + stacked
+   card sections) mirrors the P-10 `ExpenseDetailPage`: the read-only summary
+   card (`ExpenseSummary`, C-04) and the decision card (`ExpenseReviewForm`,
+   J-04) are siblings, and the not-pending notice borders the same cards.
+   The confirmation dialog (C-05) styles live in `shared/ConfirmDialog`. */
+
+.expense-review-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.expense-review-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.expense-review-page__header p {
+  color: var(--color-text-muted);
+}
+
+.expense-review-page__back {
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.expense-review-page__back:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+.expense-review-page__notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.expense-review-page__notice p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.expense-review-page__notice-link {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.expense-review-page__notice-link:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .expense-review-page__header {
+    flex-direction: column;
+  }
+}

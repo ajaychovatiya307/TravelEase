@@ -1,0 +1,92 @@
+/* P-16 Admin – Users page shell (I-14, frontend-tasks.md; frontend-spec.md
+   §4.12) — mirrors ExpenseListPage.css (header + new-action layout, 640px
+   breakpoint) plus the inline create/edit form panel (only one visible at a
+   time). Design tokens only. */
+
+.users-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.users-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.users-page__header p {
+  color: var(--color-text-muted);
+}
+
+.users-page__new-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font: inherit;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.users-page__new-action:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Inline create/edit form panel — the list is hidden while it is open. */
+.users-page__form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.users-page__form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.users-page__form-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+}
+
+.users-page__edit-action {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.users-page__edit-action:hover {
+  background-color: var(--color-surface);
+}
+
+@media (max-width: 640px) {
+  .users-page__header {
+    flex-direction: column;
+  }
+
+  .users-page__form-header {
+    align-items: flex-start;
+  }
+}

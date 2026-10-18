@@ -1,0 +1,24 @@
+/* Audit Log Viewer page shell (I-15, frontend-tasks.md; P-20,
+   frontend-spec.md §4.13). Plain CSS referencing design tokens only
+   (frontend-constitution.md §12) — no hardcoded magic values. The table
+   itself is styled by the shared DataTable (src/shared/DataTable). */
+.audit-log-page {
+  width: 100%;
+}
+
+.audit-log-page__heading {
+  margin-bottom: var(--space-1);
+}
+
+.audit-log-page__note {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.audit-log-page__filter-bar {
+  margin-bottom: var(--space-4);
+}
+
+.audit-log-page__table {
+  /* Owned by the shared DataTable (table/card/skeleton layout). */
+}

@@ -1,0 +1,35 @@
+/* ApprovalDecisionForm (J-02, frontend-tasks.md): approve/reject decision
+   form layout (frontend-spec.md §4.6, frontend-clarification.md Q16). Plain
+   CSS referencing design tokens only (frontend-constitution.md §12); the
+   individual field chrome (label/input/inline error) comes from the shared
+   FormField styles (src/shared/FormField/FormField.css). */
+.approval-decision-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.approval-decision-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.approval-decision-form__submit {
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-weight: var(--font-weight-medium);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+}
+
+.approval-decision-form__submit:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.approval-decision-form__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

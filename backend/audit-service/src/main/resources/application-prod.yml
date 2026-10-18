@@ -1,0 +1,24 @@
+# Production profile (SPRING_PROFILES_ACTIVE=prod). Secrets and connection settings come from the
+# environment / secret manager; startup fails if they are missing or insecure (common-lib
+# ProductionSafetyEnvironmentPostProcessor). Demo seeding can never be enabled with this profile.
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+spring:
+  jpa:
+    show-sql: false
+logging:
+  level:
+    root: INFO
+    com.travelease: INFO
+    org.hibernate.SQL: WARN
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never

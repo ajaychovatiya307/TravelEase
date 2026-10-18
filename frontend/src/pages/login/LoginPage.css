@@ -1,0 +1,31 @@
+/* Login (P-01, frontend-spec.md §4.1; frontend-tasks.md I-01): centered card
+   inside the minimal AuthLayout. Plain CSS referencing design tokens only
+   (frontend-constitution.md §12) — no hardcoded magic values. */
+.login-page {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.login-page__intro {
+  color: var(--color-text-muted);
+}
+
+.login-page__form {
+  margin-top: var(--space-4);
+}
+
+.login-page__submit {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-weight: var(--font-weight-medium);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+}
+
+.login-page__submit:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}

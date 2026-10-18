@@ -1,0 +1,17 @@
+/* Dashboard / Home (P-02, frontend-spec.md §4.2; frontend-tasks.md I-02):
+   stacked RoleSection cards inside the AuthenticatedLayout. Plain CSS
+   referencing design tokens only (frontend-constitution.md §12) — no
+   hardcoded magic values. */
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 40rem;
+}
+
+/* Per-type count breakdown line inside the "My Travel Requests & Expenses"
+   section's RoleSection body slot (muted small type is set by the wrapper). */
+.dashboard-page__breakdown {
+  margin: 0;
+}

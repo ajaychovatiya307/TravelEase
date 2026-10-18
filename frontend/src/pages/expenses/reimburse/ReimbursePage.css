@@ -1,0 +1,48 @@
+/* Expense reimbursement page shell (I-13, frontend-tasks.md; P-15,
+   frontend-spec.md §4.11). Plain CSS referencing design tokens only
+   (frontend-constitution.md §12) — no hardcoded magic values. */
+.reimburse-page {
+  width: 100%;
+  max-width: 36rem;
+}
+
+.reimburse-page__heading {
+  margin-bottom: var(--space-2);
+}
+
+.reimburse-page__back-link {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+  color: var(--color-primary);
+}
+
+.reimburse-page__back-link:hover {
+  color: var(--color-primary-hover);
+}
+
+.reimburse-page__summary {
+  margin-top: var(--space-4);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.reimburse-page__summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.reimburse-page__summary-item dt {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.reimburse-page__summary-item dd {
+  margin: 0;
+  text-align: right;
+}
+
+.reimburse-page__form {
+  margin-top: var(--space-5);
+}

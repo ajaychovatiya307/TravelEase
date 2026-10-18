@@ -1,0 +1,85 @@
+/* P-10 Expense Claim Detail (I-10, frontend-tasks.md; frontend-spec.md
+   §4.8). Tokens per frontend-constitution.md §12; the page shell (header +
+   stacked card sections) mirrors the P-09/P-14 expense pages, and the
+   documents card borders the sibling `ExpenseSummary`/`ActionBar` cards. */
+
+.expense-detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.expense-detail-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.expense-detail-page__header p {
+  color: var(--color-text-muted);
+}
+
+.expense-detail-page__back {
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.expense-detail-page__back:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+.expense-detail-page__documents {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.expense-detail-page__documents-title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-lg);
+}
+
+.expense-detail-page__documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.expense-detail-page__document {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.expense-detail-page__document-name {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.expense-detail-page__document-meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.expense-detail-page__documents-empty {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 640px) {
+  .expense-detail-page__header {
+    flex-direction: column;
+  }
+}

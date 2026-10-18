@@ -1,0 +1,23 @@
+/* P-13 expense review form (J-04, frontend-tasks.md; hosted by the I-12
+   ExpenseReviewPage): the Finance Approve/Reject decision form per
+   frontend-spec.md §4.10, mirroring J-02 for the expense resource. Tokens
+   per frontend-constitution.md §12; the card mirrors `ExpenseSummary` and
+   the submit button mirrors the P-10 `ActionBar` (I-10) primary-button
+   pattern. Field chrome (label, input, inline error) is the shared FormField
+   (C-07) styling; the Q13 confirmation dialog belongs to the host page. */
+
+.expense-review-form {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+.expense-review-form form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.expense-review-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
