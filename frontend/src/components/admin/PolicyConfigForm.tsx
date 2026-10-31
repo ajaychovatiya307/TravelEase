@@ -253,7 +253,7 @@ export function PolicyConfigForm({
         <div className="policy-config-form__actions">
           <button
             type="submit"
-            className="policy-config-form__submit"
+            className="button button-primary policy-config-form__submit"
             data-testid="policy-config-form-submit"
             disabled={isSubmitting}
           >

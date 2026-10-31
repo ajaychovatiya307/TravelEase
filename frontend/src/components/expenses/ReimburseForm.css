@@ -15,22 +15,4 @@
   justify-content: flex-end;
 }
 
-.reimburse-form__submit {
-  padding: var(--space-2) var(--space-4);
-  background-color: var(--color-primary);
-  color: var(--color-primary-contrast);
-  font-weight: var(--font-weight-medium);
-  border: var(--border-width) solid var(--color-primary);
-  border-radius: var(--border-radius-sm);
-  cursor: pointer;
-}
-
-.reimburse-form__submit:hover:not(:disabled) {
-  background-color: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
-}
-
-.reimburse-form__submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+/* The submit button uses the shared `.button .button-primary` styles (global.css). */

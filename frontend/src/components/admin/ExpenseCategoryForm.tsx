@@ -245,7 +245,7 @@ export function ExpenseCategoryForm({
         <div className="expense-category-form__actions">
           <button
             type="submit"
-            className="expense-category-form__submit"
+            className="button button-primary expense-category-form__submit"
             data-testid="expense-category-form-submit"
             disabled={isSubmitting}
           >

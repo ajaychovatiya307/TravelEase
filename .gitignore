@@ -10,6 +10,9 @@
 *.p12
 *.jks
 *.pfx
+*.keystore
+id_rsa*
+id_ed25519*
 
 # ---------------------------------------------------------------------------
 # Backend (Maven / Java)
@@ -27,7 +30,9 @@ uploads/
 # Frontend (Node / Vite) — also covered by frontend/.gitignore
 # ---------------------------------------------------------------------------
 node_modules/
-frontend/dist/
+dist/
+build/
+out/
 coverage/
 *.tsbuildinfo
 .eslintcache
@@ -41,7 +46,11 @@ logs/
 *.tmp
 *.bak
 *.swp
+*.swo
+*.pid
 *~
+.~lock.*#
+npm-debug.log*
 
 # ---------------------------------------------------------------------------
 # OS and IDE files (personal settings stay local)
@@ -51,3 +60,4 @@ Thumbs.db
 .idea/
 *.iml
 .vscode/
+.history/

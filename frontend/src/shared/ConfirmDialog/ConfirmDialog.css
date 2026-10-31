@@ -6,15 +6,16 @@
   justify-content: center;
   background-color: var(--color-overlay);
   z-index: 1000;
+  padding: var(--space-4);
 }
 
 .confirm-dialog {
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   color: var(--color-text);
   border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-md);
-  padding: var(--space-5);
+  border-radius: 16px;
+  box-shadow: var(--shadow-popover);
+  padding: var(--space-6);
   max-width: 28rem;
   width: 100%;
 }
@@ -28,4 +29,18 @@
 
 .confirm-dialog__actions .button {
   min-width: 110px;
+}
+
+@media (max-width: 480px) {
+  .confirm-dialog {
+    padding: var(--space-5);
+  }
+
+  .confirm-dialog__actions {
+    flex-direction: column-reverse;
+  }
+
+  .confirm-dialog__actions .button {
+    width: 100%;
+  }
 }

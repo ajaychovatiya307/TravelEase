@@ -175,7 +175,7 @@ export function ReimburseForm({
       />
 
       <div className="reimburse-form__actions">
-        <button type="submit" className="reimburse-form__submit" disabled={!isValid || submitting}>
+        <button type="submit" className="button button-primary reimburse-form__submit" disabled={!isValid || submitting}>
           Mark as Reimbursed
         </button>
       </div>

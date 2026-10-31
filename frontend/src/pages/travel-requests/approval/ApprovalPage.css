@@ -1,60 +1,137 @@
 /* Travel request approval page shell (I-07, frontend-tasks.md; P-07,
    frontend-spec.md §4.6). Plain CSS referencing design tokens only
-   (frontend-constitution.md §12) — no hardcoded magic values. */
+   (frontend-constitution.md §12). The page renders as a single card: heading,
+   back link, a key/value summary, then the action form below a divider. */
 .approval-page {
   width: 100%;
-  max-width: 36rem;
+  max-width: 44rem;
+  padding: var(--space-6);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 16px;
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  animation: rise-in 280ms var(--ease-out) backwards;
 }
 
 .approval-page__heading {
   margin-bottom: var(--space-2);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
 }
 
 .approval-page__back-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   margin-bottom: var(--space-5);
   color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.approval-page__back-link::before {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  background-color: currentColor;
+  -webkit-mask: var(--icon-mask-arrow-left) center / contain no-repeat;
+  mask: var(--icon-mask-arrow-left) center / contain no-repeat;
+  transition: transform var(--duration-fast) ease;
 }
 
 .approval-page__back-link:hover {
   color: var(--color-primary-hover);
 }
 
+.approval-page__back-link:hover::before {
+  transform: translateX(-2px);
+}
+
 .approval-page__summary {
   margin-top: var(--space-4);
-  border-top: var(--border-width) solid var(--color-border);
+  overflow: hidden;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 12px;
 }
 
 .approval-page__summary-item {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  padding: var(--space-2) 0;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-4);
   border-bottom: var(--border-width) solid var(--color-border);
 }
 
+.approval-page__summary-item:nth-child(odd) {
+  background-color: var(--color-surface-subtle);
+}
+
+.approval-page__summary-item:last-child {
+  border-bottom: 0;
+}
+
 .approval-page__summary-item dt {
+  flex: none;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
 }
 
 .approval-page__summary-item dd {
   margin: 0;
+  min-width: 0;
   text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .approval-page__documents {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   margin-top: var(--space-4);
 }
 
 .approval-page__documents li {
-  margin-bottom: var(--space-1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 10px;
+  background-color: var(--color-surface-subtle);
+  font-size: var(--font-size-sm);
 }
 
-.approval-page__documents li:last-child {
-  margin-bottom: 0;
+.approval-page > p {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
 }
 
 .approval-page__decision {
   margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+@media (max-width: 600px) {
+  .approval-page {
+    padding: var(--space-5) var(--space-4);
+    border-radius: 12px;
+  }
+
+  .approval-page__summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .approval-page__summary-item dd {
+    text-align: left;
+  }
 }

@@ -4,7 +4,6 @@ import { useAuth } from '../../context/AuthContext'
 import { routeTable } from '../../routes/routeTable'
 import { NotificationBell } from '../../components/notifications/NotificationBell'
 import { SessionExpiryWarning } from '../../components/session/SessionExpiryWarning'
-import { ThemeToggle } from '../../components/theme/ThemeToggle'
 
 interface AuthenticatedLayoutProps {
   children: ReactNode
@@ -80,15 +79,14 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
             ))}
           </div>
           <div className="topbar-actions">
-            <ThemeToggle />
             <NotificationBell />
             <Link className="button button-secondary" to="/account/password">
               <i className="icon icon-lock" />
-              Change password
+              <span className="button-label">Change password</span>
             </Link>
             <button className="button button-secondary" type="button" onClick={clearAuthState}>
               <i className="icon icon-logout" />
-              Logout
+              <span className="button-label">Logout</span>
             </button>
           </div>
         </header>

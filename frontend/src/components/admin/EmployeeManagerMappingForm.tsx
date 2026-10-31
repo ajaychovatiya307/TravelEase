@@ -212,7 +212,7 @@ export function EmployeeManagerMappingForm({
         <div className="employee-manager-mapping-form__actions">
           <button
             type="submit"
-            className="employee-manager-mapping-form__submit"
+            className="button button-primary employee-manager-mapping-form__submit"
             data-testid="employee-manager-mapping-form-submit"
             disabled={isSubmitting}
           >

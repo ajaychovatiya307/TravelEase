@@ -285,7 +285,7 @@ export function UserAccountForm({
         <div className="user-account-form__actions">
           <button
             type="submit"
-            className="user-account-form__submit"
+            className="button button-primary user-account-form__submit"
             data-testid="user-account-form-submit"
             disabled={isSubmitting}
           >

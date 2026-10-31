@@ -14,22 +14,4 @@
   justify-content: flex-end;
 }
 
-.approval-decision-form__submit {
-  padding: var(--space-2) var(--space-4);
-  background-color: var(--color-primary);
-  color: var(--color-primary-contrast);
-  font-weight: var(--font-weight-medium);
-  border: var(--border-width) solid var(--color-primary);
-  border-radius: var(--border-radius-sm);
-  cursor: pointer;
-}
-
-.approval-decision-form__submit:hover:not(:disabled) {
-  background-color: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
-}
-
-.approval-decision-form__submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+/* The submit button uses the shared `.button .button-primary` styles (global.css). */

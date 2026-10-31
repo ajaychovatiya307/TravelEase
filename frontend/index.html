@@ -1,29 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light" style="color-scheme: light; background: #f4f7f8">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light dark" />
-    <script>
-      // Apply the theme before first paint to avoid a light/dark flash. Mirrors
-      // src/theme/theme.ts: saved choice wins, otherwise follow the OS preference.
-      (function () {
-        var theme
-        try {
-          theme = localStorage.getItem('travelease-theme')
-        } catch (e) {}
-        if (theme !== 'light' && theme !== 'dark') {
-          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-        }
-        document.documentElement.dataset.theme = theme
-      })()
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Light mode only: never let the OS dark preference restyle native UI or the page. -->
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
     />
-    <title>frontend</title>
+    <title>TravelEase</title>
   </head>
   <body>
     <div id="root"></div>

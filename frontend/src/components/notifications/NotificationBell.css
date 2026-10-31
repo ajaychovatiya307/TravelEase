@@ -18,7 +18,7 @@
 }
 
 .notification-bell__trigger:hover {
-  background: var(--color-surface);
+  background: var(--color-surface-hover);
 }
 
 .notification-bell__trigger:focus-visible,
@@ -61,9 +61,9 @@
   max-height: min(30rem, calc(100vh - 6rem));
   overflow: auto;
   border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius-md);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-md);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-popover);
 }
 
 .notification-bell__heading {
@@ -76,7 +76,7 @@
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
   border-bottom: var(--border-width) solid var(--color-border);
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
 .notification-bell__heading h2 {
@@ -105,13 +105,13 @@
   border: 0;
   border-bottom: var(--border-width) solid var(--color-border);
   color: var(--color-text);
-  background: var(--color-bg);
+  background: var(--color-surface);
   cursor: pointer;
   text-align: left;
 }
 
 .notification-bell__item:hover {
-  background: var(--color-surface);
+  background: var(--color-surface-hover);
 }
 
 .notification-bell__item--unread {

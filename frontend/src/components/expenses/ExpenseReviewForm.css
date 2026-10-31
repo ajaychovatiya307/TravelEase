@@ -7,9 +7,11 @@
    (C-07) styling; the Q13 confirmation dialog belongs to the host page. */
 
 .expense-review-form {
-  padding: var(--space-4);
+  padding: var(--space-5);
   border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius-md);
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
 }
 
 .expense-review-form form {

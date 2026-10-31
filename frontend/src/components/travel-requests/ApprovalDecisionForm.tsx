@@ -142,7 +142,7 @@ export function ApprovalDecisionForm({
       <div className="approval-decision-form__actions">
         <button
           type="submit"
-          className="approval-decision-form__submit"
+          className="button button-primary approval-decision-form__submit"
           disabled={!isValid || submitting}
         >
           Submit Decision

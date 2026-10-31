@@ -33,11 +33,7 @@
   color: var(--color-text);
 }
 
+/* The selects use the shared `.input` field chrome (global.css). */
 .review-queue-page__filter-select {
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-base);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  min-width: 12rem;
 }

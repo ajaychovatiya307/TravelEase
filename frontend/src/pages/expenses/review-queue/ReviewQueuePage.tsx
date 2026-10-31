@@ -168,7 +168,7 @@ export function ReviewQueuePage() {
           <label htmlFor="review-queue-status-filter">Status</label>
           <select
             id="review-queue-status-filter"
-            className="review-queue-page__filter-select"
+            className="input review-queue-page__filter-select"
             value={statusFilter}
             onChange={(event) => setFilter('status', event.target.value)}
           >
@@ -183,7 +183,7 @@ export function ReviewQueuePage() {
           <label htmlFor="review-queue-duplicate-flag-filter">Duplicates</label>
           <select
             id="review-queue-duplicate-flag-filter"
-            className="review-queue-page__filter-select"
+            className="input review-queue-page__filter-select"
             value={duplicateFlagFilter}
             onChange={(event) => setFilter('duplicateFlag', event.target.value)}
           >

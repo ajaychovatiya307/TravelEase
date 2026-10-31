@@ -195,7 +195,7 @@ export function AuditFilterBar({
       <div className="audit-filter-bar__actions">
         <button
           type="button"
-          className="audit-filter-bar__apply"
+          className="button button-primary audit-filter-bar__apply"
           onClick={handleApply}
           disabled={disabled}
         >
@@ -203,7 +203,7 @@ export function AuditFilterBar({
         </button>
         <button
           type="button"
-          className="audit-filter-bar__clear"
+          className="button button-secondary audit-filter-bar__clear"
           onClick={handleClear}
           disabled={disabled}
         >

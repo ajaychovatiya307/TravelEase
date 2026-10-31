@@ -54,19 +54,19 @@ export function ActionBar({
   return (
     <div className="action-bar" role="group" aria-label="Actions">
       {isEditable ? (
-        <button type="button" className="action-bar__button" onClick={onEdit}>
+        <button type="button" className="button button-secondary action-bar__button" onClick={onEdit}>
           Edit
         </button>
       ) : null}
       {isResubmittable ? (
-        <button type="button" className="action-bar__button" onClick={onResubmit}>
+        <button type="button" className="button button-secondary action-bar__button" onClick={onResubmit}>
           Resubmit
         </button>
       ) : null}
       {isDecidable ? (
         <button
           type="button"
-          className="action-bar__button action-bar__button--primary"
+          className="button button-primary action-bar__button action-bar__button--primary"
           onClick={onDecide}
         >
           Approve/Reject

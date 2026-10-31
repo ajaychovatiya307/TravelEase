@@ -53,7 +53,7 @@ export function ActionBar({ claimId, isEditable, isReviewable, isReimbursable }:
       {isEditable ? (
         <button
           type="button"
-          className="action-bar__button"
+          className="button button-secondary action-bar__button"
           onClick={() => navigate(`/expenses/${claimId}/edit`)}
         >
           Edit
@@ -62,7 +62,7 @@ export function ActionBar({ claimId, isEditable, isReviewable, isReimbursable }:
       {isReviewable ? (
         <button
           type="button"
-          className="action-bar__button"
+          className="button button-secondary action-bar__button"
           onClick={() => navigate(`/expenses/${claimId}/review`)}
         >
           Review
@@ -71,7 +71,7 @@ export function ActionBar({ claimId, isEditable, isReviewable, isReimbursable }:
       {isReimbursable ? (
         <button
           type="button"
-          className="action-bar__button"
+          className="button button-secondary action-bar__button"
           onClick={() => navigate(`/expenses/${claimId}/reimburse`)}
         >
           Reimburse
